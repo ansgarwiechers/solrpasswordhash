@@ -1,0 +1,56 @@
+<project name="SolrPasswordHash" default="dist" basedir=".">
+    <description>Calculate hash with random salt for Solr authentication from given password.</description>
+    <!-- set global properties for this build -->
+    <property name="lib" location="lib"/>
+    <property name="src" location="src"/>
+    <property name="build" location="bin"/>
+    <property name="codecs.url" value="https://archive.apache.org/dist/commons/codec"/>
+    <property name="codecs.archive" value="commons-codec-current-bin.tar.gz"/>
+
+    <path id="project.class.path">
+        <pathelement path="${java.class.path}/"/>
+        <fileset dir="${lib}">
+            <include name="**/*.jar"/>
+        </fileset>
+    </path>
+
+    <target name="clean">
+        <delete dir="${build}"/>
+        <delete dir="${lib}"/>
+    </target>
+
+    <target name="distclean" depends="clean">
+        <delete file="${ant.project.name}.jar"/>
+        <delete>
+            <fileset dir="." includes="*.tar.gz"/>
+        </delete>
+    </target>
+
+    <target name="fetch">
+        <get src="${codecs.url}/${codecs.archive}" dest="${codecs.archive}" skipexisting="true" verbose="true"/>
+    </target>
+
+    <target name="unpack" depends="fetch">
+        <untar src="${codecs.archive}" dest="${lib}" compression="gzip" overwrite="false">
+            <patternset>
+                <include name="*/commons-codec-*.jar"/>
+                <exclude name="*/commons-codec-*-*.jar"/>
+            </patternset>
+            <mapper type="flatten"/>
+        </untar>
+    </target>
+
+    <target name="compile" depends="clean, unpack">
+        <mkdir dir="${build}"/>
+        <javac srcdir="${src}" destdir="${build}" classpathref="project.class.path" includeantruntime="false"/>
+    </target>
+
+    <target name="dist" depends="compile">
+        <jar destfile="${ant.project.name}.jar" basedir="${build}">
+            <manifest>
+                <attribute name="Main-Class" value="${ant.project.name}"/>
+            </manifest>
+            <zipgroupfileset dir="${lib}" includes="**/*.jar"/>
+        </jar>
+    </target>
+</project>
