@@ -1,0 +1,5 @@
+*.sw[a-p]
+/*.tar.gz
+/*.jar
+/bin/
+/lib/
