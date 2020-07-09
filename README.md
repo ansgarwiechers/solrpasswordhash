@@ -39,7 +39,7 @@ values separated by a single space):
         "blockUnknown": true,
         "class": "solr.BasicAuthPlugin",
         "credentials": {
-          "solr": "BASE64_PW_HASH BASE64_SALT"
+          "solr": "B64_PW_HASH B64_SALT"
         }
       },
       "authorization": {
