@@ -20,7 +20,7 @@ Building
 To compile the code and build the jar file clone the repository, `cd` into the
 repository root directory and run `ant`. The build process will automatically
 download the codec library required for the base64 encoding (meaning you need
-Internet access during at build time too).
+Internet access at build time too).
 
 If you don't want to compile the code yourself you can download the jar file
 from the Releases section.
