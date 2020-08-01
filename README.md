@@ -1,7 +1,7 @@
 What's this about?
 ==================
-If you want [basic authentication enabled][1] in Solr the developers expect you
-to launch the service with well-known credentials (solr:SolrRocks), and then
+If you want [basic authentication enabled][1] in Solr Cloud the developers expect
+you to launch the service with well-known credentials (solr:SolrRocks), and then
 change those credentials via the API. No, seriously.
 
 ![HAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHA!][2]
@@ -60,7 +60,7 @@ values separated by a single space):
       }
     }
 
-Then launch Solr with that file
+Then load that file into Solr (or rather, into Zookeeper)
 
     bin/solr zk cp file:/path/to/security.json zk:/security.json -z localhost:9983
 
