@@ -22,6 +22,15 @@ repository root directory and run `ant`. The build process will automatically
 download the codec library required for the base64 encoding (meaning you need
 Internet access at build time too).
 
+Note: Since the Apache guys decided to remove the symlink to the current version
+of the codec library (presumably in an attempt to force everyone to be more
+deliberate about what library versions are included in their software) the build
+file now sets a default version (currently 1.15), which you can override on the
+commandline if need be:
+
+    ant                         # build with default codec version (1.15)
+    ant -Dcodecs.version=1.13   # build with codec version 1.13
+
 If you don't want to compile the code yourself you can download the jar file
 from the Releases section.
 
